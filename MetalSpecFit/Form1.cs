@@ -31,12 +31,24 @@ namespace MetalSpecFit
 
         private void buttonBrowseUV_Click(object sender, EventArgs e)
         {
-
+            var filepath = openFileDialog1.ShowDialog();
+            if (filepath != DialogResult.OK)
+            {
+                textBoxUVPath.Text = String.Empty;
+                return;
+            }
+            textBoxUVPath.Text = openFileDialog1.FileName;
         }
 
         private void buttonBrowseCD_Click(object sender, EventArgs e)
         {
-
+            var filepath = openFileDialog1.ShowDialog();
+            if (filepath != DialogResult.OK)
+            {
+                textBoxCDPath.Text = String.Empty;
+                return;
+            }
+            textBoxCDPath.Text = openFileDialog1.FileName;
         }
 
         private void buttonSimulate_Click(object sender, EventArgs e)
@@ -56,6 +68,14 @@ namespace MetalSpecFit
             float cdymax = float.MinValue;
             float uvymin = float.MaxValue;
             float uvymax = float.MinValue;
+
+            //Clear out chart if other elements are there
+            var chartelems = chartUV.Series.Count - 1;
+            for (int i = chartelems; i > -1; i--)
+            {
+                chartUV.Series.Remove(chartUV.Series[i]);
+                chartCD.Series.Remove(chartCD.Series[i]);
+            }
 
             //Populate our x values and build the simulated spectra lists
             for (float xpos = xmin; xpos < xmax; xpos += xstep)
@@ -114,33 +134,49 @@ namespace MetalSpecFit
                 totalcurves += simComponents.Count;
             }
 
+            chartCD.Series.Add("Sim");
+            chartUV.Series.Add("Sim");
+
+            //TODO: Add real spectra addition here
+            if(!textBoxUVPath.Text.Equals(String.Empty))
+            {
+                chartUV.Series.Add("Real");
+
+            }
+            if (!textBoxCDPath.Text.Equals(String.Empty))
+            {
+                chartCD.Series.Add("Real");
+
+            }
+
+
+            var cdbasespec = chartCD.Series.Count;
+            var uvbasespec = chartUV.Series.Count;
+
+            for (int i = 1; i < totalcurves; i++)
+            {
+                chartCD.Series.Add("Comp " + (i - 1));
+                chartUV.Series.Add("Comp " + (i - 1));
+            }
+
             for (int i = 0; i < totalcurves; i++)
             {
                 chartCD.Series[i].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
                 chartUV.Series[i].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-
-                chartCD.Series[i].Points.Clear();
-                chartUV.Series[i].Points.Clear();
             }
 
             //Push the data to the charts
             for (int currx = 0; currx < numx; currx++)
             {
                 chartUV.Series[0].Points.AddXY(xvals[currx], simUV[currx]);
-                //chartUV.Series[0].Label = "Simulated";
                 chartCD.Series[0].Points.AddXY(xvals[currx], simCD[currx]);
-                //chartCD.Series[0].Label = "Simulated";
-
-                //TODO: Put the spectra reading code here
 
                 if (checkBoxComponents.Checked)
                 {
                     for(int curve = 0; curve < numCurves; curve++)
                     {
-                        chartUV.Series[curve + 2].Points.AddXY(xvals[currx], simComponents[curve][currx]);
-                        //chartUV.Series[curve + 2].Label = ("Comp " + (curve + 1));
-                        chartCD.Series[curve + 2].Points.AddXY(xvals[currx], simComponents[curve][currx]);
-                        //chartCD.Series[curve + 2].Label = ("Comp " + (curve + 1));
+                        chartUV.Series[curve + uvbasespec].Points.AddXY(xvals[currx], simComponents[curve][currx]);
+                        chartCD.Series[curve + cdbasespec].Points.AddXY(xvals[currx], simComponents[curve][currx]);
                     }
                 }
             }

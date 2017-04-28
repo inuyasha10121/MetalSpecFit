@@ -28,14 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBoxSpecPath = new System.Windows.Forms.TextBox();
+            this.textBoxUVPath = new System.Windows.Forms.TextBox();
             this.buttonBrowseUV = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -53,6 +53,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.checkBoxComponents = new System.Windows.Forms.CheckBox();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.chartUV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartCD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownXMin)).BeginInit();
@@ -69,12 +70,12 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "UV Spec:";
             // 
-            // textBoxSpecPath
+            // textBoxUVPath
             // 
-            this.textBoxSpecPath.Location = new System.Drawing.Point(89, 12);
-            this.textBoxSpecPath.Name = "textBoxSpecPath";
-            this.textBoxSpecPath.Size = new System.Drawing.Size(726, 22);
-            this.textBoxSpecPath.TabIndex = 2;
+            this.textBoxUVPath.Location = new System.Drawing.Point(89, 12);
+            this.textBoxUVPath.Name = "textBoxUVPath";
+            this.textBoxUVPath.Size = new System.Drawing.Size(726, 22);
+            this.textBoxUVPath.TabIndex = 2;
             // 
             // buttonBrowseUV
             // 
@@ -111,7 +112,7 @@
             this.textBoxParameters.Name = "textBoxParameters";
             this.textBoxParameters.Size = new System.Drawing.Size(258, 362);
             this.textBoxParameters.TabIndex = 5;
-            this.textBoxParameters.Text = "350, 1, 0.2";
+            this.textBoxParameters.Text = "350, 1, 2\r\n345, 0.5, 1";
             // 
             // textBoxCDPath
             // 
@@ -141,32 +142,32 @@
             // 
             // chartUV
             // 
-            chartArea1.Name = "ChartArea1";
-            this.chartUV.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chartUV.Legends.Add(legend1);
+            chartArea3.Name = "ChartArea1";
+            this.chartUV.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.chartUV.Legends.Add(legend3);
             this.chartUV.Location = new System.Drawing.Point(364, 102);
             this.chartUV.Name = "chartUV";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chartUV.Series.Add(series1);
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.chartUV.Series.Add(series3);
             this.chartUV.Size = new System.Drawing.Size(760, 300);
             this.chartUV.TabIndex = 10;
             this.chartUV.Text = "UV-Spec";
             // 
             // chartCD
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chartCD.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chartCD.Legends.Add(legend2);
+            chartArea4.Name = "ChartArea1";
+            this.chartCD.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            this.chartCD.Legends.Add(legend4);
             this.chartCD.Location = new System.Drawing.Point(364, 408);
             this.chartCD.Name = "chartCD";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chartCD.Series.Add(series2);
+            series4.ChartArea = "ChartArea1";
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            this.chartCD.Series.Add(series4);
             this.chartCD.Size = new System.Drawing.Size(760, 300);
             this.chartCD.TabIndex = 11;
             this.chartCD.Text = "CD-Spec";
@@ -302,6 +303,10 @@
             this.checkBoxComponents.Text = "Show Components";
             this.checkBoxComponents.UseVisualStyleBackColor = true;
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -324,7 +329,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.buttonBrowseUV);
-            this.Controls.Add(this.textBoxSpecPath);
+            this.Controls.Add(this.textBoxUVPath);
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -342,7 +347,7 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBoxSpecPath;
+        private System.Windows.Forms.TextBox textBoxUVPath;
         private System.Windows.Forms.Button buttonBrowseUV;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
@@ -360,6 +365,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.CheckBox checkBoxComponents;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 
